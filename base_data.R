@@ -31,6 +31,7 @@ additional_state_data = read_csv('data/additional_state_data.csv') %>%
 
 state_abbrevations = read_csv('data/state_abbreviations.csv')
 
+# data taken from: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910/DVN/E9N6PH
 cces = read_csv('data/CCES20_Common_OUTPUT.csv') %>%
   select(commonpostweight, CC20_401, CC20_410, birthyr, gender, race, educ, inputstate, countyfips) %>%
   filter(CC20_401 == 5) %>% # CC20_401 is whether they voted, CC20_401 == 5 is yes
@@ -50,10 +51,10 @@ cces = read_csv('data/CCES20_Common_OUTPUT.csv') %>%
                         race == 2 ~ "Black or African-American", # Black or African-American
                         race == 3 ~ "Hispanic or Latino", # Hispanic or Latino
                         race == 4 ~ "Asian or Asian-American", # Asian or Asian-American
-                        race == 5 ~ "other", # Native American, which we change to other because L2
-                        race == 6 ~ "other", # Middle Eastern, which we change to other because L2
+                        race == 5 ~ "other", # Native American, which we change to other
+                        race == 6 ~ "other", # Middle Eastern, which we change to other
                         race == 7 ~ "other", # Other
-                        race == 8 ~ "other", # Middle Eastern, which we change to other because L2
+                        race == 8 ~ "other", # Middle Eastern, which we change to other
                         race == 98 ~ "unknown", # Skipped
                         race == 99 ~ "unknown")) %>% # not asked 
   mutate(educ=case_when(educ == 1 ~ "No college",
